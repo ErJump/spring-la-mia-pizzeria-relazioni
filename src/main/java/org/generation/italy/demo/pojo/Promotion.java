@@ -73,7 +73,12 @@ public class Promotion {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	
+	public List<Pizza> getPizzas() {
+		return pizzas;
+	}
+	public void setPizzas(List<Pizza> pizzas) {
+		this.pizzas = pizzas;
+	}
 	
 	@Override
 	public String toString() {
