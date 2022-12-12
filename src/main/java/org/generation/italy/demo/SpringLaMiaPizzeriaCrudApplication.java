@@ -1,9 +1,13 @@
 package org.generation.italy.demo;
 
+import java.time.LocalDate;
+
 import org.generation.italy.demo.pojo.Drink;
 import org.generation.italy.demo.pojo.Pizza;
+import org.generation.italy.demo.pojo.Promotion;
 import org.generation.italy.demo.service.DrinkService;
 import org.generation.italy.demo.service.PizzaService;
+import org.generation.italy.demo.service.PromotionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -17,6 +21,10 @@ public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner{
 	
 	@Autowired
 	private DrinkService drinkService;
+
+	@Autowired
+	private PromotionService promotionService;
+
 	
 	public static void main(String[] args) {
 		SpringApplication.run(SpringLaMiaPizzeriaCrudApplication.class, args);
@@ -25,9 +33,15 @@ public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		
-		Pizza p1 = new Pizza("Margherita", "la classica, la migliore" , 10);
-		Pizza p2 = new Pizza("Capricciosa", "Smettila di piangere" , 14);
-		Pizza p3 = new Pizza("Special1", "la special degli specials" , 20);
+		Promotion pr1 = new Promotion(LocalDate.parse("2022-10-12"), LocalDate.parse("2022-11-12"), "Super sconto");
+		Promotion pr2 = new Promotion(LocalDate.parse("2023-01-01"), LocalDate.parse("2023-01-09"), "Inizio 2023");
+		
+		promotionService.save(pr1);
+		promotionService.save(pr2);
+		
+		Pizza p1 = new Pizza("Margherita", "la classica, la migliore" , 10, pr1);
+		Pizza p2 = new Pizza("Capricciosa", "Smettila di piangere" , 14, pr2);
+		Pizza p3 = new Pizza("Special1", "la special degli specials" , 20, null);
 		
 		pizzaService.save(p1);
 		pizzaService.save(p2);

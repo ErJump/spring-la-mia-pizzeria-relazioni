@@ -1,12 +1,14 @@
 package org.generation.italy.demo.pojo;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 
@@ -29,6 +31,9 @@ public class Promotion {
 	@Column(unique = true)
 	@NotNull(message = "il titolo non può essere vuoto")
 	private String title;
+	
+	@OneToMany(mappedBy = "promotion")
+	private List<Pizza> pizzas;
 	
 	public Promotion() { }
 	public Promotion(LocalDate startDate, LocalDate endDate, String title) {
@@ -68,6 +73,7 @@ public class Promotion {
 	public void setTitle(String title) {
 		this.title = title;
 	}
+	
 	
 	@Override
 	public String toString() {
