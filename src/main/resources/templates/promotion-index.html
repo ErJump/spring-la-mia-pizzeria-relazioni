@@ -22,11 +22,15 @@
 						<th>Titolo</th>
 						<th>Data inizio</th>
 						<th>Data fine</th>
+						<th>Pizze<th>
 					</tr>
 					<tr th:each="promotion : ${promotions}" th:object="${promotion}">
 						<td th:text="*{title}"></td>
 						<td th:text="*{startDate}"></td>
 						<td th:text="*{endDate}"></td>
+						<td >
+							<span th:each="pizza : ${promotion.pizzas}">[[${pizza.name}]]</span>
+						</td>
 					</tr>
 				</table>
 				<h3 th:if="${promotions.isEmpty()}">Non ci sono promozioni al momento</h3>
