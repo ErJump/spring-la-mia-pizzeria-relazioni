@@ -1,12 +1,15 @@
 package org.generation.italy.demo;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.generation.italy.demo.pojo.Drink;
+import org.generation.italy.demo.pojo.Ingredient;
 import org.generation.italy.demo.pojo.Pizza;
 import org.generation.italy.demo.pojo.Promotion;
 import org.generation.italy.demo.service.DrinkService;
+import org.generation.italy.demo.service.IngredientService;
 import org.generation.italy.demo.service.PizzaService;
 import org.generation.italy.demo.service.PromotionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +28,9 @@ public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner{
 
 	@Autowired
 	private PromotionService promotionService;
+	
+	@Autowired
+	private IngredientService ingredientService;
 
 	
 	public static void main(String[] args) {
@@ -40,9 +46,32 @@ public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner{
 		promotionService.save(pr1);
 		promotionService.save(pr2);
 		
-		Pizza p1 = new Pizza("Margherita", "la classica, la migliore" , 10, pr1);
-		Pizza p4 = new Pizza("Margheritona", "la classicone, la migliorona" , 20, pr1);
-		Pizza p2 = new Pizza("Capricciosa", "Smettila di piangere" , 14, pr2);
+		Ingredient i1 = new Ingredient("mozzarella");
+		Ingredient i2 = new Ingredient("pomodoro");
+		Ingredient i3 = new Ingredient("salame");
+		Ingredient i4 = new Ingredient("gorgonzola");
+		Ingredient i5 = new Ingredient("carrarmato");
+		
+		List<Ingredient> ingredients1 = new ArrayList<>();
+		ingredients1.add(i1);
+		ingredients1.add(i2);
+
+		List<Ingredient> ingredients2 = new ArrayList<>();
+		ingredients2.add(i3);
+		ingredients2.add(i4);
+
+		List<Ingredient> ingredients3 = new ArrayList<>();
+		ingredients3.add(i5);
+
+		ingredientService.save(i1);
+		ingredientService.save(i2);
+		ingredientService.save(i3);
+		ingredientService.save(i4);
+		ingredientService.save(i5);
+		
+		Pizza p1 = new Pizza("Margherita", "la classica, la migliore" , 10, pr1, ingredients1);
+		Pizza p4 = new Pizza("Margheritona", "la classicone, la migliorona" , 20, pr1, ingredients2);
+		Pizza p2 = new Pizza("Capricciosa", "Smettila di piangere" , 14, pr2, ingredients3);
 		Pizza p3 = new Pizza("Special1", "la special degli specials" , 20, null);
 		
 		pizzaService.save(p1);
@@ -62,21 +91,34 @@ public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner{
 		//promotionService.deletePromotionById(1);
 		//pizzaService.deletePizzaById(1);
 		
-		System.out.println("---------------------------");
-		List<Pizza> pizzas = pizzaService.findAll();
+//		System.out.println("---------------------------");
+//		List<Pizza> pizzas = pizzaService.findAll();
+//		for (Pizza pizza : pizzas) {
+//			System.err.println(pizza + "\n\t" + pizza.getPromotion());
+//		}
+//		
+//		System.out.println("---------------------------");
+//		List<Promotion> promotions = promotionService.findAllWPizza();
+//		
+//		for (Promotion promotion : promotions) {
+//			System.err.println(promotion);
+//			for (Pizza pizza : promotion.getPizzas()) {
+//				System.err.println("\t" + pizza);
+//			}
+//		}
+		
+		System.err.println("---------------------------");
+		List<Pizza> pizzas = pizzaService.findAllWIngredient();
 		for (Pizza pizza : pizzas) {
-			System.err.println(pizza + "\n\t" + pizza.getPromotion());
+			System.err.println(pizza + "\n\t" + pizza.getIngredients());
 		}
 		
-		System.out.println("---------------------------");
-		List<Promotion> promotions = promotionService.findAllWPizza();
-		
-		for (Promotion promotion : promotions) {
-			System.err.println(promotion);
-			for (Pizza pizza : promotion.getPizzas()) {
-				System.err.println("\t" + pizza);
-			}
+		System.err.println("---------------------------");
+		List<Ingredient> ingredients = ingredientService.findAllWPizza();
+		for (Ingredient i : ingredients) {
+			System.err.println(i +  "\n\t" + i.getPizzas());
 		}
+
 	}
 
 }
