@@ -24,13 +24,27 @@
 			<div class="col-12">
 				<form method="POST" action="/pizza/create" th:object="${pizza}">
 					<label>Nome</label><br>
-					<input type="text" name="name" th:field="*{name}">
+					<input type="text" name="name" th:field="*{name}" class="mb-3">
 					<br>
 					<label>Descrizione</label><br>
-					<textarea name="description" th:field="*{description}"></textarea>
+					<textarea name="description" th:field="*{description}" class="mb-3"></textarea>
 					<br>
 					<label>Prezzo</label><br>
-					<input type="number" name="price" th:field="*{price}">
+					<input type="number" name="price" th:field="*{price}" class="mb-3">
+					<br>
+					<label>Promozione</label>
+					<select name="promotion" class="mb-3">
+						<option th:value="null" th:field="${pizza.promotion}">-</option>
+						<option
+							th:each="promotion : ${promotions}"
+							th:object="${promotion}"
+							
+							th:value="*{id}"
+							th:field="${pizza.promotion}"
+						>
+							[[*{title}]]
+						</option>
+					</select>
 					<br>
 					<button type="submit">Crea</button>
 				</form>
