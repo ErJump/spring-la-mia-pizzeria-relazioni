@@ -20,12 +20,17 @@
 				<table class="table table-dark">
 					<tr>
 						<th>Nome</th>
-						<th>Pizze<th>
+						<th>Pizze</th>
+						<th>Azioni</th>
 					</tr>
 					<tr th:each="ingredient : ${ingredients}" th:object="${ingredient}">
 						<td th:text="*{name}"></td>
 						<td>
 							[[*{pizzas}]]
+						</td>
+						<td>
+							<a th:href="@{/ingredient/edit/{id}(id=${ingredient.id})}" class="btn btn-primary">Modifica</a>
+							<a th:href="@{/ingredient/delete/{id}(id=${ingredient.id})}" class="btn btn-danger">Elimina</a>
 						</td>
 					</tr>
 				</table>

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -52,4 +53,25 @@ public class IngredientController {
 		iS.save(ingredient);
 		return "redirect:/ingredient";
 	}
+	
+	@GetMapping("/edit/{id}")
+	public String editIngredient(@PathVariable("id") int id, Model model) {
+		
+		Ingredient i = iS.getIngredientById(id).get();
+		List<Pizza> pizzas = pS.findAll();
+		model.addAttribute("ingredient", i);
+		model.addAttribute("pizzas", pizzas);
+		return "ingredient-edit";
+	}
+	
+	@PostMapping("/edit")
+	public String updateIngredient(@Valid Ingredient ingredient) {
+		
+		List<Pizza> ingredientPizzas = ingredient.getPizzas();
+		for (Pizza p : ingredientPizzas)
+			p.getIngredients().add(ingredient);
+		iS.save(ingredient);
+		return "redirect:/ingredient";
+	}
+	
 }
