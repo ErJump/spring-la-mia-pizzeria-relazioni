@@ -73,7 +73,9 @@ public class PizzaController {
 		
 		Optional<Pizza> optPizza = pizzaService.getPizzaById(id);
 		Pizza pizza = optPizza.get();
+		List<Ingredient> ingredients = iService.findAll();
 		
+		model.addAttribute("ingredients", ingredients);
 		model.addAttribute("pizza", pizza);
 		
 		return "pizza-edit";
