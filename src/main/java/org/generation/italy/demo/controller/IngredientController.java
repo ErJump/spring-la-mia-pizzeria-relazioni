@@ -1,6 +1,5 @@
 package org.generation.italy.demo.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.generation.italy.demo.pojo.Ingredient;
