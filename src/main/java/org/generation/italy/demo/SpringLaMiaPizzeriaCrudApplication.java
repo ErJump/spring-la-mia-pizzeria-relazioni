@@ -59,7 +59,7 @@ public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner{
 		drinkService.save(d3);
 		
 		//----------DELETE-------------
-		promotionService.deletePromotionById(1);
+		//promotionService.deletePromotionById(1);
 		//pizzaService.deletePizzaById(1);
 		
 		System.out.println("---------------------------");
