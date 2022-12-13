@@ -83,7 +83,7 @@ public class Promotion {
 	
 	@Override
 	public String toString() {
-		return "(" + getId() + ")" + " " + getTitle() + " - " + getStartDate() + " " + getEndDate();
+		return "(" + getId() + ")" + " " + getTitle() + " - " + getStartDate() + " / " + getEndDate();
 	}
 	
 	

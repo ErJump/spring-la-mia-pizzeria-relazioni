@@ -1,5 +1,7 @@
 package org.generation.italy.demo.pojo;
 
+import java.util.List;
+
 import org.generation.italy.demo.interf.PriceableInt;
 
 import jakarta.persistence.Column;
@@ -9,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
@@ -39,12 +42,23 @@ public class Pizza implements PriceableInt{
 	@JoinColumn(name="promotion_id", nullable=true)
 	private Promotion promotion;
 	
+	@ManyToMany
+	private List<Ingredient> ingredients;
+	
 	public Pizza() { }
 	public Pizza(String name, String description, int price, Promotion promotion ) {
 		setName(name);
 		setDescription(description);
 		setPrice(price);
 		setPromotion(promotion);
+	}
+	public Pizza(String name, String description, int price, Promotion promotion, List<Ingredient> ingredients) {
+		setName(name);
+		setDescription(description);
+		setPrice(price);
+		setPromotion(promotion);
+		setIngredients(ingredients);
+		
 	}
 
 	public int getId() {
@@ -77,6 +91,12 @@ public class Pizza implements PriceableInt{
 		this.promotion = promotion;
 	}
 	
+	public List<Ingredient> getIngredients() {
+		return ingredients;
+	}
+	public void setIngredients(List<Ingredient> ingredients) {
+		this.ingredients = ingredients;
+	}
 	@Override
 	public int getPrice() {
 		return price;
