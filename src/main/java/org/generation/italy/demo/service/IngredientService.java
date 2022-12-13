@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.generation.italy.demo.pojo.Ingredient;
-import org.generation.italy.demo.pojo.Promotion;
 import org.generation.italy.demo.repo.IngredientRepo;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
