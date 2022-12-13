@@ -55,10 +55,12 @@ public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner{
 		List<Ingredient> ingredients1 = new ArrayList<>();
 		ingredients1.add(i1);
 		ingredients1.add(i2);
+		ingredients1.add(i5);
 
 		List<Ingredient> ingredients2 = new ArrayList<>();
 		ingredients2.add(i3);
 		ingredients2.add(i4);
+		ingredients2.add(i1);
 
 		List<Ingredient> ingredients3 = new ArrayList<>();
 		ingredients3.add(i5);
@@ -90,6 +92,7 @@ public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner{
 		//----------DELETE-------------
 		//promotionService.deletePromotionById(1);
 		//pizzaService.deletePizzaById(1);
+		//ingredientService.deleteIngredientById(1);
 		
 //		System.out.println("---------------------------");
 //		List<Pizza> pizzas = pizzaService.findAll();
@@ -118,6 +121,8 @@ public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner{
 		for (Ingredient i : ingredients) {
 			System.err.println(i +  "\n\t" + i.getPizzas());
 		}
+		
+		
 
 	}
 
