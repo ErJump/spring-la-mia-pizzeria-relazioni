@@ -74,4 +74,11 @@ public class IngredientController {
 		return "redirect:/ingredient";
 	}
 	
+	@GetMapping("/delete/{id}")
+	public String deleteIngredient(@PathVariable("id") int id) {
+		
+		iS.deleteIngredientById(id);
+		return "redirect:/ingredient";
+	}
+	
 }
