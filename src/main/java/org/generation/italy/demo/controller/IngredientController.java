@@ -1,6 +1,7 @@
 package org.generation.italy.demo.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.generation.italy.demo.pojo.Ingredient;
 import org.generation.italy.demo.pojo.Pizza;
@@ -67,9 +68,18 @@ public class IngredientController {
 	@PostMapping("/edit")
 	public String updateIngredient(@Valid Ingredient ingredient) {
 		
+		Optional<Ingredient> optI = iS.getIngredientById(ingredient.getId());
+		Ingredient ing = optI.get();
+		
+		for (Pizza pizza : ing.getPizzas()) {
+			pizza.removeIngredients(ing);
+		}
+		
 		List<Pizza> ingredientPizzas = ingredient.getPizzas();
-		for (Pizza p : ingredientPizzas)
-			p.getIngredients().add(ingredient);
+		for (Pizza p : ingredientPizzas) {
+			p.addIngredients(ingredient);
+		}
+		
 		iS.save(ingredient);
 		return "redirect:/ingredient";
 	}
