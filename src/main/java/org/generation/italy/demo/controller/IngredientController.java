@@ -87,6 +87,10 @@ public class IngredientController {
 	@GetMapping("/delete/{id}")
 	public String deleteIngredient(@PathVariable("id") int id) {
 		
+		Ingredient i = iS.getIngredientById(id).get();
+		for (Pizza pizza : i.getPizzas())
+			pizza.removeIngredients(i);
+			
 		iS.deleteIngredientById(id);
 		return "redirect:/ingredient";
 	}
